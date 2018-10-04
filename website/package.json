@@ -77,7 +77,29 @@
   "dependencies": {
     "core-js": "^2.0.0",
     "normalize.css": "^4.0.0",
-    "react": "^15.0.0",
-    "react-dom": "^15.0.0"
+    "copy-webpack-plugin": "^4.5.1",
+    "eslint": "^5.0.0",
+    "firebase": "^4.13.1",
+    "font-awesome": "^4.7.0",
+    "font-awesome-webpack": "^0.0.5-beta.2",
+    "fontawesome": "^4.7.2",
+    "glamor": "^2.20.40",
+    "glamorous": "^4.12.4",
+    "google-maps-react": "^2.0.2",
+    "moment": "^2.22.1",
+    "prettier": "^1.13.5",
+    "react": "^16.3.2",
+    "react-datepicker": "^1.4.1",
+    "react-dates": "^16.7.0",
+    "react-dom": "^16.3.2",
+    "react-firebase-file-uploader": "^2.4.1",
+    "react-font-face": "^0.2.1",
+    "react-fontawesome": "^1.6.1",
+    "react-places-autocomplete": "^7.1.2",
+    "react-player": "^1.6.2",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-select": "^2.0.0",
+    "webpack-hot-middleware": "^2.22.1"
   }
 }
