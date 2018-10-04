@@ -1,32 +1,76 @@
-'use strict';
+var HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
-const path = require('path');
-const args = require('minimist')(process.argv.slice(2));
+var path = require('path');
+module.exports = {
+    context: __dirname + '/src',
+    entry:
 
-// List of allowed environments
-const allowedEnvs = ['dev', 'dist', 'test'];
+        [
+            'react-hot-loader/patch',
+            'webpack/hot/only-dev-server',
+            './app.js'
+        ],
 
-// Set the correct environment
-let env;
-if (args._.length > 0 && args._.indexOf('start') !== -1) {
-  env = 'test';
-} else if (args.env) {
-  env = args.env;
-} else {
-  env = 'dev';
+
+
+
+
+
+
+
+    output: {
+        filename: 'app.js',
+        path: __dirname + '/dist',
+    },
+    plugins: [
+
+
+        new HtmlWebpackPlugin({
+            template: 'index.template.html',
+            inject: 'body'
+        }) ,
+        new CopyWebpackPlugin([
+            { from: 'images', to: 'images' }
+        ]),
+        new CopyWebpackPlugin([
+            { from: 'fonts', to: 'fonts' }
+        ]),
+
+    ],
+
+    module: {
+
+
+
+
+        loaders: [
+
+            {
+                test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                loader: "url-loader?limit=10000&mimetype=application/font-woff"
+            },
+            {
+                test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                loader: "file-loader"
+            },
+            {
+                test: /\.js$/,
+                exclude: /(node_modules|bower_components)/,
+                loader: 'babel-loader',
+                query: {
+                    presets: ['es2015','react']
+                }
+            },
+
+
+            {test: /\.css$/, loader: 'style-loader!css-loader'},
+            {test: /\.png$/, loader: 'url-loader?limit=100000'},
+            {test: /\.jpg$/, loader: 'file-loader'}
+        ]
+    }
+
+
 }
-process.env.REACT_WEBPACK_ENV = env;
 
-/**
- * Build the webpack configuration
- * @param  {String} wantedEnv The wanted environment
- * @return {Object} Webpack config
- */
-function buildConfig(wantedEnv) {
-  let isValid = wantedEnv && wantedEnv.length > 0 && allowedEnvs.indexOf(wantedEnv) !== -1;
-  let validEnv = isValid ? wantedEnv : 'dev';
-  let config = require(path.join(__dirname, 'cfg/' + validEnv));
-  return config;
-}
 
-module.exports = buildConfig(env);
